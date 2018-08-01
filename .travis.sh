@@ -60,6 +60,9 @@ case "$JDK" in
 10)
   install_jdk $JDK10_URL
   ;;
+11-ea)
+  install_jdk $JDK11_EA_URL
+  ;;
 esac
 
 # Do not use "~/.mavenrc" set by Travis (https://github.com/travis-ci/travis-ci/issues/3893),
@@ -85,6 +88,8 @@ case "$JDK" in
 6 | 7 | 8 | 9)
   mvn -V -B -e verify -Djdk.version=${JDK} -Dbytecode.version=${JDK} -Decj=${ECJ:-} --toolchains=./.travis/travis-toolchains.xml
   ;;
+11-ea)
+  ;&
 10)
   mvn -V -B -e verify -Dbytecode.version=10
   ;;
