@@ -188,6 +188,14 @@ final class ReportSupport {
 			final String bundeName, final MavenProject project,
 			final List<String> includes, final List<String> excludes,
 			final ISourceFileLocator locator) throws IOException {
+
+		if (!((SourceFileCollection) locator).sourceRoots.get(0).exists()) {
+			log.info(format(
+					"Skipping bundle '%s' because it doesn't have any source files.",
+					bundeName));
+			return;
+		}
+
 		final CoverageBuilder builder = new CoverageBuilder();
 		final File classesDir = new File(project.getBuild()
 				.getOutputDirectory());
